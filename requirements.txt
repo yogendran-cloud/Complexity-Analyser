@@ -1,0 +1,3 @@
+# Dashboard-only dependencies for running dashboard.py directly from a source checkout.
+# Library users should install the base package; Streamlit is available via [dashboard].
+streamlit>=1.49,<2.0

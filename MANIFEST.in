@@ -1,0 +1,6 @@
+include README.md
+include LICENSE
+include pyproject.toml
+include complexity_analyzer.py
+include dashboard.py
+include sample_algorithms.py
