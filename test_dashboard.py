@@ -2,7 +2,7 @@
 
 import unittest
 
-from complexity_analyzer import ComplexityReport, Measurement
+from complexity_analyzer_empirical import ComplexityReport, Measurement
 from dashboard import _has_traced_memory, _runtime_display_scale
 
 

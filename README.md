@@ -24,9 +24,9 @@ python -m pip install complexity-analyzer-empirical
 ```
 
 The PyPI distribution is named `complexity-analyzer-empirical`; the Python
-import module is `complexity_analyzer`. A separate PyPI distribution named
-`complexity-analyzer` also uses that import name. Do not install both
-distributions into the same environment because their module files can conflict.
+import module is `complexity_analyzer_empirical`. This module name is distinct
+from the `complexity_analyzer` module installed by a separate PyPI distribution
+named `complexity-analyzer`, avoiding their previous top-level module collision.
 
 To install the optional dashboard dependency as well:
 
@@ -70,7 +70,7 @@ called from any Python project using a callable you trust.
 Keep your function in Python code you trust, then pass it directly:
 
 ```python
-from complexity_analyzer import complexity
+from complexity_analyzer_empirical import complexity
 
 
 def sum_values(size: int) -> int:
@@ -116,7 +116,7 @@ The `sample_algorithms.py` module provides `constant`, `logarithmic`, `linear`,
 `linearithmic`, `quadratic`, and `exponential` for experiments. For example:
 
 ```python
-from complexity_analyzer import complexity
+from complexity_analyzer_empirical import complexity
 from sample_algorithms import linear
 
 report = complexity(linear, sizes=(100, 500, 1_000, 2_000), trials=3)
@@ -234,11 +234,11 @@ The timer now runs with tracing disabled because `tracemalloc` can add
 
 ## Troubleshooting
 
-- **`ModuleNotFoundError: complexity_analyzer`:** install into the same Python
+- **`ModuleNotFoundError: complexity_analyzer_empirical`:** install into the same Python
 	interpreter that runs your script (`python -m pip install
 	complexity-analyzer-empirical`). Check `python -m pip show
 	complexity-analyzer-empirical` and avoid naming your own script
-	`complexity_analyzer.py`.
+	`complexity_analyzer_empirical.py`.
 - **`ModuleNotFoundError: streamlit`:** the dashboard is optional; install
 	`complexity-analyzer-empirical[dashboard]` to use it. The core import does
 	not need Streamlit.
@@ -252,8 +252,8 @@ The timer now runs with tracing disabled because `tracemalloc` can add
 
 ## Build and publish to PyPI
 
-The distribution name is `complexity-analyzer-empirical`; the import remains
-`complexity_analyzer`. Check the name on PyPI immediately before publishing,
+The distribution name is `complexity-analyzer-empirical`; import it as
+`complexity_analyzer_empirical`. Check the name on PyPI immediately before publishing,
 because name availability can change. Review the license, package metadata,
 version, and built artifact contents before publishing.
 

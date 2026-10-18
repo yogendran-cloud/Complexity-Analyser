@@ -8,7 +8,7 @@ from pathlib import Path
 
 import streamlit as st
 
-from complexity_analyzer import AnalysisError, ComplexityReport, complexity
+from complexity_analyzer_empirical import AnalysisError, ComplexityReport, complexity
 from sample_algorithms import (
     constant,
     exponential,

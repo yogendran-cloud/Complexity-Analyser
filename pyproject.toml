@@ -34,5 +34,5 @@ Repository = "https://github.com/yogendran-cloud/Complexity-Analyser"
 Issues = "https://github.com/yogendran-cloud/Complexity-Analyser/issues"
 
 [tool.setuptools]
-py-modules = ["complexity_analyzer", "dashboard", "sample_algorithms"]
+py-modules = ["complexity_analyzer_empirical", "dashboard", "sample_algorithms"]
 include-package-data = false

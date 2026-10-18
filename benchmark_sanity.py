@@ -7,7 +7,7 @@ results vary with Python version, hardware, and system load.
 
 from collections import Counter
 
-from complexity_analyzer import complexity
+from complexity_analyzer_empirical import complexity
 from sample_algorithms import (
     constant,
     exponential,

@@ -9,7 +9,7 @@ import unittest
 import xml.etree.ElementTree as ET
 from unittest.mock import patch
 
-from complexity_analyzer import (
+from complexity_analyzer_empirical import (
 	AnalysisError,
 	ComplexityReport,
 	Measurement,
@@ -85,7 +85,7 @@ class ComplexityTests(unittest.TestCase):
 
 	def test_short_fixed_repetition_is_not_marked_reliable(self):
 		with patch(
-			"complexity_analyzer.time.perf_counter",
+			"complexity_analyzer_empirical.time.perf_counter",
 			side_effect=(0.0, 0.0001, 1.0, 1.0001),
 		):
 			report = complexity(
@@ -148,7 +148,7 @@ class ComplexityTests(unittest.TestCase):
 			tracing_states.append(tracemalloc.is_tracing())
 
 		with patch(
-			"complexity_analyzer.time.perf_counter",
+			"complexity_analyzer_empirical.time.perf_counter",
 			side_effect=(0.0, 0.0001, 1.0, 1.0002),
 		):
 			report = complexity(

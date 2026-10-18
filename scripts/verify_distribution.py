@@ -12,7 +12,7 @@ import zipfile
 from pathlib import Path
 
 EXPECTED_MODULES = {
-    "complexity_analyzer.py",
+    "complexity_analyzer_empirical.py",
     "dashboard.py",
     "sample_algorithms.py",
 }
@@ -51,8 +51,19 @@ def inspect_artifacts(wheel: Path, sdist: Path) -> None:
             raise AssertionError("Unexpected runtime or optional dependency metadata")
 
     with tarfile.open(sdist, "r:gz") as archive:
-        if not any(name.endswith("/LICENSE") for name in archive.getnames()):
+        source_names = set(archive.getnames())
+        if not any(name.endswith("/LICENSE") for name in source_names):
             raise AssertionError("The source distribution does not contain LICENSE")
+        source_modules = {
+            name.rsplit("/", 1)[-1]
+            for name in source_names
+            if name.rsplit("/", 1)[-1].endswith(".py")
+        }
+        expected_source_modules = EXPECTED_MODULES
+        if source_modules != expected_source_modules:
+            raise AssertionError(f"Unexpected source distribution modules: {source_modules}")
+        if "complexity_analyzer.py" in source_modules:
+            raise AssertionError("The old conflicting module is present in the source distribution")
 
 
 def verify_clean_install(wheel: Path) -> None:
@@ -69,12 +80,16 @@ def verify_clean_install(wheel: Path) -> None:
         )
         smoke_check = (
             "import importlib.util, pathlib; "
-            "from complexity_analyzer import complexity; "
+            "from complexity_analyzer_empirical import complexity; "
             "sample = lambda n: [0] * n; "
+            "default_report = complexity(sample); "
             "report = complexity(sample, sizes=(10, 20), trials=1, repetitions=1); "
-            "module = pathlib.Path(__import__('complexity_analyzer').__file__).resolve(); "
+            "module = pathlib.Path(__import__('complexity_analyzer_empirical').__file__).resolve(); "
+            "assert importlib.util.find_spec('complexity_analyzer') is None; "
             "assert 'site-packages' in str(module).lower() or 'dist-packages' in str(module).lower(); "
             "assert importlib.util.find_spec('streamlit') is None; "
+            "assert len(default_report.measurements) == 5; "
+            "assert default_report.measurements[-1].median_peak_memory_bytes > 0; "
             "assert len(report.measurements) == 2; "
             "assert report.measurements[-1].median_peak_memory_bytes > 0; "
             "print('Installed module:', module); "
