@@ -12,8 +12,12 @@ estimate.
 Python 3.10 or newer is required. The core library uses only the Python
 standard library; installing it does not install Streamlit.
 The package declares Python 3.10–3.14 classifiers and a minimum version of
-Python 3.10. Release validation was performed on Python 3.14.3 only; the other
-declared versions have not been tested as part of this release validation.
+Python 3.10. Local release validation was performed on Python 3.14.3. GitHub
+Actions CI passed the complete Windows, Ubuntu, and macOS matrix for Python
+3.10–3.14 on commit
+[`27ad258`](https://github.com/yogendran-cloud/Complexity-Analyser/commit/27ad2586f8cfd585cf769362d8c59c25ef1f0d06).
+
+Project repository: <https://github.com/yogendran-cloud/Complexity-Analyser>.
 
 ```sh
 python -m pip install complexity-analyzer-empirical

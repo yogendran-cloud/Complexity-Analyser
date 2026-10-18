@@ -7,6 +7,7 @@ name = "complexity-analyzer-empirical"
 version = "0.1.0"
 description = "Empirically estimate Python callable runtime growth and peak traced memory"
 readme = "README.md"
+authors = [{ name = "YogendranPT" }]
 license = "MIT"
 license-files = ["LICENSE"]
 requires-python = ">=3.10"
@@ -27,6 +28,10 @@ dependencies = []
 
 [project.optional-dependencies]
 dashboard = ["streamlit>=1.49,<2.0"]
+
+[project.urls]
+Repository = "https://github.com/yogendran-cloud/Complexity-Analyser"
+Issues = "https://github.com/yogendran-cloud/Complexity-Analyser/issues"
 
 [tool.setuptools]
 py-modules = ["complexity_analyzer", "dashboard", "sample_algorithms"]
